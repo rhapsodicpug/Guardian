@@ -129,12 +129,12 @@ export default function GuardianDashboard() {
       setRecoveryStatus("Connecting to Guardian contract");
       setRecoveryProgress(20);
       
-      const provider = new Provider({ nodeUrl: "https://starknet-sepolia.infura.io/v3/demo" });
+      const provider = new Provider({ nodeUrl: "https://starknet-sepolia.public.blastapi.io" });
       const contractObject = new Contract(
         [
-          { name: "get_owner", type: "function", inputs: [], outputs: [{ type: "ContractAddress" }] },
-          { name: "get_guardians", type: "function", inputs: [], outputs: [{ type: "Array<ContractAddress>" }] },
-          { name: "simulate_recovery_ping", type: "function", inputs: [], outputs: [{ type: "u32" }] }
+          { name: "get_owner", type: "function", inputs: [], outputs: [{ type: "core::starknet::contract_address::ContractAddress" }] },
+          { name: "get_guardians", type: "function", inputs: [], outputs: [{ type: "core::array::Array<core::starknet::contract_address::ContractAddress>" }] },
+          { name: "simulate_recovery_ping", type: "function", inputs: [], outputs: [{ type: "core::integer::u32" }] }
         ],
         contract.address,
         provider
