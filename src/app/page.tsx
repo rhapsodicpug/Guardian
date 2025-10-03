@@ -59,14 +59,29 @@ export default function GuardianDashboard() {
   const handleConnectWallet = async () => {
     setWalletError(null);
     try {
-      const starknet = await connect();
+      const starknet = await connect({ 
+        showList: true,
+        order: ["argentx", "braavos"]
+      });
+      
       if (!starknet) {
         throw new Error("No wallet available");
       }
       
-      setAccount(starknet);
-      setUserAddress("0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef");
+      const wallet = await starknet.enable();
+      
+      if (starknet.isConnected && starknet.account) {
+        setAccount(starknet.account);
+        setUserAddress(starknet.selectedAddress || starknet.account.address);
+      } else {
+        throw new Error("Wallet connection failed");
+      }
     } catch (error: unknown) {
+      console.error("Wallet connection failed:", error);
+      setWalletError("Please install Argent X or Braavos wallet and try again");
+    }
+  };
+  };
       console.error("Wallet connection failed:", error);
       setWalletError("Please install Argent X or Braavos wallet");
     }
