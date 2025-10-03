@@ -81,8 +81,22 @@ export default function GuardianDashboard() {
     setGuardian1("");
     setGuardian2("");
     setGuardian3("");
+    setDeploymentStatus("");
+    setTransactionProgress(0);
+    setGasEstimate("");
+    setShowContractManager(false);
+    setSelectedContract(null);
+    setShowRecoverySimulation(false);
+    setRecoveryStep(0);
+    setShowContractDetails(false);
+    setShowConfirmModal(false);
+    setConfirmAction(null);
+    setFocusedInput(null);
+    setRecoveryStatus("");
+    setRecoveryProgress(0);
+    setRecoveryMessages([]);
+    setIsRecoveryRunning(false);
   };
-
   const validateStarknetAddress = (address: string): boolean => {
     return /^0x[0-9a-fA-F]{64}$/.test(address);
   };
