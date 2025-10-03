@@ -6,17 +6,16 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { connect } from "@starknet-io/get-starknet";
-import { Provider, Contract, Account, hash, CallData } from "starknet";
+import { Provider, Contract } from "starknet";
 
 // Real Guardian Contract Class Hash (with recovery simulation function)
-const GUARDIAN_CONTRACT_CLASS_HASH = "0x1e28f147ea478aa6765fa9c6bba8a478643450eb450715f0e676ee64ed4bc7c";
+// const GUARDIAN_CONTRACT_CLASS_HASH = "0x1e28f147ea478aa6765fa9c6bba8a478643450eb450715f0e676ee64ed4bc7c";
 
 function Spinner() {
   return (
@@ -38,7 +37,7 @@ export default function GuardianDashboard() {
   const [formError, setFormError] = useState<string | null>(null);
   const [deploymentResult, setDeploymentResult] = useState<{ txHash: string; contractAddress: string } | null>(null);
   const [deploymentStatus, setDeploymentStatus] = useState<string>("");
-  const [gasEstimate, setGasEstimate] = useState<string>("");
+  
   const [transactionProgress, setTransactionProgress] = useState(0);
   const [interactedContracts, setInteractedContracts] = useState<Array<{address: string; guardians: string[]}>>([]);
   const [showContractManager, setShowContractManager] = useState(false);
@@ -54,7 +53,6 @@ export default function GuardianDashboard() {
   const [recoveryProgress, setRecoveryProgress] = useState(0);
   const [isRecoveryRunning, setIsRecoveryRunning] = useState(false);
   const [recoveryMessages, setRecoveryMessages] = useState<string[]>([]);
-  const [contractedContract, setContractedContract] = useState<Contract | null>(null);
 
   const handleConnectWallet = async () => {
     setWalletError(null);
@@ -68,7 +66,7 @@ export default function GuardianDashboard() {
         throw new Error("No wallet available");
       }
       
-      const wallet = await starknet.enable();
+      await starknet.enable();
       
       if (starknet.isConnected && starknet.account) {
         setAccount(starknet.account);
@@ -77,11 +75,6 @@ export default function GuardianDashboard() {
         throw new Error("Wallet connection failed");
       }
     } catch (error: unknown) {
-      console.error("Wallet connection failed:", error);
-      setWalletError("Please install Argent X or Braavos wallet and try again");
-    }
-  };
-  };
       console.error("Wallet connection failed:", error);
       setWalletError("Please install Argent X or Braavos wallet");
     }
@@ -204,7 +197,7 @@ export default function GuardianDashboard() {
       setRecoveryStatus("Verifying guardians");
       setRecoveryProgress(40);
       
-      const guardiansResponse = await contractObject.call("get_guardians");
+      // const guardiansResponse = await contractObject.call("get_guardians");
       addRecoveryMessage(`✅ Found ${contract.guardians.length} guardian addresses`);
       addRecoveryMessage(`📍 Guardian 1: ${contract.guardians[0].slice(0, 10)}...`);
       addRecoveryMessage(`📍 Guardian 2: ${contract.guardians[1].slice(0, 10)}...`);
@@ -366,7 +359,7 @@ export default function GuardianDashboard() {
     setIsDeploying(true);
 
     try {
-      const classHash = GUARDIAN_CONTRACT_CLASS_HASH;
+      // const classHash = GUARDIAN_CONTRACT_CLASS_HASH;
       
       setDeploymentStatus("Deploying Guardian contract...");
       setTransactionProgress(0);
