@@ -518,9 +518,22 @@ export default function GuardianDashboard() {
           <div className="relative group">
             <Button 
               variant="outline" 
+              onClick={handleConnectWallet}
+              size="sm"
+              className="border-[#CCCCCC] text-[#666666] hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600 px-4 py-3 text-sm font-medium transition-all duration-300"
+            >
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d=" M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                </svg>
+                Change Wallet
+              </span>
+            </Button>
+            <Button 
+              variant="outline" 
               onClick={handleDisconnectWallet} 
               size="sm"
-              className="border-[#CCCCCC] text-[#666666] hover:bg-red-50 hover:border-red-200 hover:text-red-600 px-6 py-3 text-sm font-medium transition-all duration-300"
+              className="border-[#CCCCCC] text-[#666666] hover:bg-red-50 hover:border-red-200 hover:text-red-600 px-4 py-3 text-sm font-medium transition-all duration-300"
             >
               <span className="flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
