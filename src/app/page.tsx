@@ -132,9 +132,34 @@ export default function GuardianDashboard() {
       const provider = new Provider({ nodeUrl: "https://starknet-sepolia.public.blastapi.io" });
       const contractObject = new Contract(
         [
-          { name: "get_owner", type: "function", inputs: [], outputs: [{ type: "core::starknet::contract_address::ContractAddress" }] },
-          { name: "get_guardians", type: "function", inputs: [], outputs: [{ type: "core::array::Array<core::starknet::contract_address::ContractAddress>" }] },
-          { name: "simulate_recovery_ping", type: "function", inputs: [], outputs: [{ type: "core::integer::u32" }] }
+          { 
+            name: "get_owner", 
+            type: "function", 
+            inputs: [], 
+            outputs: [{ type: "core::starknet::contract_address::ContractAddress" }], 
+            state_mutability: "view" 
+          },
+          { 
+            name: "get_guardians", 
+            type: "function", 
+            inputs: [], 
+            outputs: [{ type: "core::array::Array<core::starknet::contract_address::ContractAddress>" }], 
+            state_mutability: "view" 
+          },
+          { 
+            name: "simulate_recovery_ping", 
+            type: "function", 
+            inputs: [], 
+            outputs: [{ type: "core::integer::u32" }], 
+            state_mutability: "view" 
+          },
+          { 
+            name: "get_guardian_count", 
+            type: "function", 
+            inputs: [], 
+            outputs: [{ type: "core::integer::u32" }], 
+            state_mutability: "view" 
+          }
         ],
         contract.address,
         provider
